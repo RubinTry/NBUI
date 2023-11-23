@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NBElasticView">
+<!--        下拉放大的阻力，值越小，阻力越大，取值范围[0,1]，默认0.8-->
+        <attr name="elasticCoefficient" format="float" />
+        <attr name="maxPullHeight" format="dimension" />
+    </declare-styleable>
+</resources>

@@ -14,9 +14,11 @@ import kotlin.math.abs
 
 /**
  * @author rubintry
- * 带有下拉放大特性的组件，特别NB，支持嵌套滑动（需要配合NestedScrollView使用）、惯性回弹
+ * NB的仿抖音“我的”页面的下拉放大效果，特别NB，自带惯性越界回弹
+ * 回弹时，速度越快，回弹越猛
  */
 class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
+    private var elasticPull: ElasticPull ?= null
     private var headerView: View? = null
     private var mHeaderWidth = 0
     private var mHeaderHeight = 0
@@ -26,38 +28,70 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
     private var mInitialY = 0f
     private var mIsBeingDragged = false
 
-    /**
-     * 最大头部下拉高度
-     */
-    private val mMaxPullHeight: Int = ScreenUtils.getScreenHeight(context) / 3
+    private val DEFAULT_MAX_PULL_HEIGHT : Int = ScreenUtils.getScreenHeight(context) / 2
 
+    /**
+     * 下拉的最大高度
+     */
+    var maxPullHeight: Int = DEFAULT_MAX_PULL_HEIGHT
+
+    private val DEFAULT_ELASTIC_COEFFCIENT : Double = 0.8
+
+    /**
+     * 下拉放大阻力系数
+     */
+    var elasticCoefficient: Double = DEFAULT_ELASTIC_COEFFCIENT
 
     /**
      * 最后一次偏移时产生的偏移量
      */
-    private var lastOffset: Int = 0
+    private var lastOffset: Int = -1
 
-    constructor(context: Context?) : super(context!!)
+    constructor(context: Context?) : super(context!!){
+        preInit(context , null)
+        init()
+    }
     constructor(context: Context?, attrs: AttributeSet?) : super(
         context!!, attrs
     ) {
+        preInit(context , attrs)
         init()
+    }
+
+    @SuppressLint("Recycle")
+    override fun preInit(context: Context?, attrs: AttributeSet?) {
+        val typedArray = context?.obtainStyledAttributes(attrs, R.styleable.NBElasticView)
+        elasticCoefficient = typedArray?.getFloat(R.styleable.NBElasticView_elasticCoefficient , -1f)?.toDouble() ?: (-1).toDouble()
+        if(elasticCoefficient == (-1).toDouble()){
+            elasticCoefficient = DEFAULT_ELASTIC_COEFFCIENT
+        }
+        maxPullHeight = typedArray?.getDimensionPixelOffset(R.styleable.NBElasticView_maxPullHeight , 0) ?: 0
+        if(maxPullHeight == 0){
+            maxPullHeight = DEFAULT_MAX_PULL_HEIGHT
+        }
+        typedArray?.recycle()
+    }
+
+
+    override fun init() {
+        mHeaderSizeReady = false
         //去除边界阴影
         isHorizontalFadingEdgeEnabled = false
         isVerticalFadingEdgeEnabled = false
         overScrollMode = OVER_SCROLL_NEVER
+        elasticPull = ElasticPullFactory.create(elasticCoefficient)
     }
-
+    /**
+     * @param onReadyPullListener 触发下拉放大的监听器
+     */
     fun setOnReadyPullListener(onReadyPullListener: OnReadyPullListener?) {
         this.onReadyPullListener = onReadyPullListener
     }
 
-    override fun init() {
-        mHeaderSizeReady = false
-    }
 
-
-
+    /**
+     * 需要被放大的头部view
+     */
     fun setHeader(header: View?): NBElasticView {
         headerView = header
         header?.post {
@@ -113,16 +147,16 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
     }
 
     private fun resetHeader() {
-        PullAnimatorUtil.resetAnimator(headerView, mHeaderHeight, mHeaderWidth)
+        elasticPull?.resetAnimator(headerView, mHeaderHeight, mHeaderWidth)
     }
 
     private fun changeHeader(offsetY: Int) {
-        PullAnimatorUtil.pullAnimator(
+        elasticPull?.pullAnimator(
             headerView,
             mHeaderHeight,
             mHeaderWidth,
             offsetY,
-            mMaxPullHeight
+            maxPullHeight
         )
     }
 
@@ -133,11 +167,7 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
     private val isHeaderReady: Boolean
         get() = headerView != null && mHeaderSizeReady
 
-    
-    companion object{
-        @JvmField
-        val TAG = "NBElasticView"
-    }
+
 
     override fun onStartNestedScroll(child: View, target: View, axes: Int, type: Int): Boolean {
         return true
@@ -156,11 +186,11 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
         if(type == TYPE_NON_TOUCH){
             //执行头部伸缩动画
             if(isReady && isHeaderReady){
-                PullAnimatorUtil.pullByAnimator(headerView ,
+                elasticPull?.pullByAnimator(headerView ,
                     mHeaderHeight,
                     mHeaderWidth,
                     3 * abs(lastOffset),
-                    mMaxPullHeight)
+                    maxPullHeight)
             }
         }
     }
@@ -193,5 +223,10 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
 
     }
 
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        elasticPull = null
+    }
 
 }

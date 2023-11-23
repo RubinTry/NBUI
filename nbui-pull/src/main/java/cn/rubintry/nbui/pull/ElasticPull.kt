@@ -3,15 +3,16 @@ package cn.rubintry.nbui.pull
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.view.View
-import android.view.animation.LinearInterpolator
 import android.widget.RelativeLayout
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import kotlin.math.pow
 
 /**
  * @author rubintry
+ * @param elasticCoefficient 弹性阻力系数
  */
-object PullAnimatorUtil {
+class ElasticPull(private val elasticCoefficient: Double) {
+
     /**
      * @param headerView
      * @param headerHeight
@@ -27,7 +28,7 @@ object PullAnimatorUtil {
         if (headerView == null) {
             return
         }
-        val pullOffset = offsetY.toDouble().pow(0.9).toInt()
+        val pullOffset = offsetY.toDouble().pow(elasticCoefficient).toInt()
         val newHeight = (maxHeight + headerHeight).coerceAtMost(pullOffset + headerHeight)
         val newWidth = (newHeight.toFloat() / headerHeight * headerWidth).toInt()
         headerView.layoutParams.height = newHeight
@@ -56,7 +57,7 @@ object PullAnimatorUtil {
         if (headerView == null) {
             return
         }
-        val pullOffset = offsetY.toDouble().pow(0.9).toInt()
+        val pullOffset = offsetY.toDouble().pow(elasticCoefficient).toInt()
         val newHeight = (maxHeight + headerHeight).coerceAtMost(pullOffset + headerHeight)
 
         val heightAnimator = ValueAnimator.ofInt(headerHeight , newHeight)

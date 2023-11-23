@@ -34,7 +34,6 @@ class MainActivity : ComponentActivity() {
         imgHeader = findViewById(R.id.imgHeader)
         rvTest = findViewById(R.id.rvTest)
 
-        Log.d("NBElasticView", "id: ${nslScrollView?.id}")
 
         elasticView?.setHeader(imgHeader)
         elasticView?.setOnReadyPullListener(object : OnReadyPullListener{
