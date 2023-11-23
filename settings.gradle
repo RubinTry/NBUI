@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "NBUI"
 include ':app'
+include ':nbui-core'
+include ':nbui-pull'
