@@ -11,7 +11,9 @@ NBUI，As the name suggests, This is a fantastic UI view library , it contains s
 * Support simulated Tiktok of chinese's "Mine" pull-down zoom effect and cross boundary rebound
 
 ## View List（When you can click it , it's usable）
-* [NBElasticView](./document/readme_nb_elastic.md)
-* NBImageView
-* NBProgressBar
+* pull
+  - [NBElasticView](./document/readme_nb_elastic.md)
+* normalView
+  - NBImageView
+  - NBProgressBar
 
