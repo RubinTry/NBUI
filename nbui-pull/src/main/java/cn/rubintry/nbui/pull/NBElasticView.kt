@@ -146,7 +146,7 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
     override fun onNestedScrollAccepted(child: View, target: View, axes: Int, type: Int) {
 
     }
-    
+
 
     /**
      * 此处会在滑动时被调用2次，一次是ACTION_UP和ACTION_CANCEL调用一次，此时type为TYPE_TOUCH,一次是fling完毕，此时type为TYPE_NON_TOUCH。
@@ -159,7 +159,7 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
                 PullAnimatorUtil.pullByAnimator(headerView ,
                     mHeaderHeight,
                     mHeaderWidth,
-                    abs(lastOffset),
+                    3 * abs(lastOffset),
                     mMaxPullHeight)
             }
         }
