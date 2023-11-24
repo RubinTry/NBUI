@@ -6,7 +6,14 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
+import androidx.core.view.NestedScrollingChild
+import androidx.core.view.NestedScrollingChild2
+import androidx.core.view.NestedScrollingChild3
+import androidx.core.view.NestedScrollingChildHelper
+import androidx.core.view.NestedScrollingParent
+import androidx.core.view.NestedScrollingParent2
 import androidx.core.view.NestedScrollingParent3
+import androidx.core.view.ViewCompat
 import androidx.core.view.ViewCompat.TYPE_NON_TOUCH
 import cn.rubintry.nbui.core.INBUIInterface
 import kotlin.math.abs
@@ -17,7 +24,9 @@ import kotlin.math.abs
  * NB的仿抖音“我的”页面的下拉放大效果，特别NB，自带惯性越界回弹
  * 回弹时，速度越快，回弹越猛
  */
-class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
+class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3, NestedScrollingParent2,
+    NestedScrollingChild3, NestedScrollingChild2, NestedScrollingParent,
+    NestedScrollingChild{
     private var elasticPull: ElasticPull ?= null
     private var headerView: View? = null
     private var mHeaderWidth = 0
@@ -28,6 +37,8 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
     private var mInitialY = 0f
     private var mIsBeingDragged = false
 
+    private var mNestedScrollingV2ConsumedCompat = IntArray(2)
+
     private val DEFAULT_MAX_PULL_HEIGHT : Int = ScreenUtils.getScreenHeight(context) / 2
 
     /**
@@ -35,7 +46,7 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
      */
     var maxPullHeight: Int = DEFAULT_MAX_PULL_HEIGHT
 
-    private val DEFAULT_ELASTIC_COEFFCIENT : Double = 0.8
+    private val DEFAULT_ELASTIC_COEFFCIENT : Double = 0.95
 
     /**
      * 下拉放大阻力系数
@@ -46,6 +57,8 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
      * 最后一次偏移时产生的偏移量
      */
     private var lastOffset: Int = -1
+
+    private var mNestedScrollingChildHelper: NestedScrollingChildHelper? = null
 
     constructor(context: Context?) : super(context!!){
         preInit(context , null)
@@ -80,6 +93,7 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
         isVerticalFadingEdgeEnabled = false
         overScrollMode = OVER_SCROLL_NEVER
         elasticPull = ElasticPullFactory.create(elasticCoefficient)
+        mNestedScrollingChildHelper = NestedScrollingChildHelper(this)
     }
     /**
      * @param onReadyPullListener 触发下拉放大的监听器
@@ -102,12 +116,16 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
         return this
     }
 
+    override fun requestDisallowInterceptTouchEvent(b: Boolean) {
+        parent?.requestDisallowInterceptTouchEvent(b)
+    }
+
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+        println("onInterceptTouchEvent")
         if (isHeaderReady && isReady) {
             when (ev.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    //                    log("onInterceptTouchEvent DOWN");
                     mInitialX = ev.x
                     mInitialY = ev.y
                     mIsBeingDragged = false
@@ -116,7 +134,7 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
                 MotionEvent.ACTION_MOVE -> {
                     val diffY = ev.y - mInitialY
                     val diffX = ev.x - mInitialX
-                    if (diffY > 0 && diffY / Math.abs(diffX) > 2) {
+                    if (diffY > 0 && diffY / Math.abs(diffX) > 1) {
                         mIsBeingDragged = true
                         return true
                     }
@@ -130,6 +148,7 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent): Boolean {
+        println("onTouchEvent")
         if (isHeaderReady && isReady) {
             when (ev.action) {
                 MotionEvent.ACTION_MOVE -> if (mIsBeingDragged) {
@@ -217,6 +236,10 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
         dyUnconsumed: Int,
         type: Int
     ) {
+        onNestedScroll(
+            target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type,
+            mNestedScrollingV2ConsumedCompat
+        )
     }
 
     override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
@@ -227,6 +250,61 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3{
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         elasticPull = null
+    }
+
+    override fun startNestedScroll(axes: Int, type: Int): Boolean {
+        return mNestedScrollingChildHelper?.startNestedScroll(axes) == true
+    }
+
+    override fun stopNestedScroll(type: Int) {
+        mNestedScrollingChildHelper?.stopNestedScroll()
+    }
+
+    override fun hasNestedScrollingParent(type: Int): Boolean {
+        return mNestedScrollingChildHelper?.hasNestedScrollingParent() == true
+    }
+
+    override fun dispatchNestedScroll(
+        dxConsumed: Int,
+        dyConsumed: Int,
+        dxUnconsumed: Int,
+        dyUnconsumed: Int,
+        offsetInWindow: IntArray?,
+        type: Int
+    ): Boolean {
+        return type == ViewCompat.TYPE_TOUCH && mNestedScrollingChildHelper?.dispatchNestedScroll(
+            dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow, type
+        ) == true
+    }
+
+    override fun dispatchNestedPreScroll(
+        dx: Int,
+        dy: Int,
+        consumed: IntArray?,
+        offsetInWindow: IntArray?,
+        type: Int
+    ): Boolean {
+        return type == ViewCompat.TYPE_TOUCH && dispatchNestedPreScroll(
+            dx, dy, consumed,
+            offsetInWindow
+        )
+    }
+
+    override fun dispatchNestedScroll(
+        dxConsumed: Int,
+        dyConsumed: Int,
+        dxUnconsumed: Int,
+        dyUnconsumed: Int,
+        offsetInWindow: IntArray?,
+        type: Int,
+        consumed: IntArray
+    ) {
+        if (type == ViewCompat.TYPE_TOUCH) {
+            mNestedScrollingChildHelper?.dispatchNestedScroll(
+                dxConsumed, dyConsumed, dxUnconsumed,
+                dyUnconsumed, offsetInWindow, type, consumed
+            )
+        }
     }
 
 }
