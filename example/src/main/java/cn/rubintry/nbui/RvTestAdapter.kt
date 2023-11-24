@@ -30,9 +30,12 @@ class RvTestAdapter(private var list: MutableList<String>) : Adapter<RvTestAdapt
 
     override fun onBindViewHolder(holder: RvVH, position: Int) {
         holder.tvTxt?.text = list[position]
+        holder.mItemView.setOnClickListener {
+
+        }
     }
 
-    class RvVH(private val itemView: View) : ViewHolder(itemView) {
+    class RvVH(val mItemView: View) : ViewHolder(mItemView) {
         var tvTxt: TextView ?= null
         init {
             tvTxt = itemView.findViewById<TextView>(R.id.item_txt)

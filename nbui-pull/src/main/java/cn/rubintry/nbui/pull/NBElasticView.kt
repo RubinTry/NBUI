@@ -122,7 +122,6 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3, Nes
 
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        println("onInterceptTouchEvent")
         if (isHeaderReady && isReady) {
             when (ev.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -148,7 +147,6 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3, Nes
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent): Boolean {
-        println("onTouchEvent")
         if (isHeaderReady && isReady) {
             when (ev.action) {
                 MotionEvent.ACTION_MOVE -> if (mIsBeingDragged) {
