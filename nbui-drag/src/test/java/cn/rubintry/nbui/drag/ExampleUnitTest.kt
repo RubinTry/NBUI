@@ -1,4 +1,4 @@
-package cn.rubintry.nbui
+package cn.rubintry.nbui.drag
 
 import org.junit.Test
 

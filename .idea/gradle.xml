@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/example" />
             <option value="$PROJECT_DIR$/nbui-core" />
+            <option value="$PROJECT_DIR$/nbui-drag" />
             <option value="$PROJECT_DIR$/nbui-pull" />
           </set>
         </option>

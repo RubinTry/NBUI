@@ -133,8 +133,8 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3, Nes
                 MotionEvent.ACTION_MOVE -> {
                     val diffY = ev.y - mInitialY
                     val diffX = ev.x - mInitialX
-                    if (diffY > 0 && diffY / Math.abs(diffX) > 1) {
-                        mIsBeingDragged = true
+                    if (diffY > 0) {
+//                        mIsBeingDragged = true
                         return true
                     }
                 }
@@ -149,12 +149,12 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3, Nes
     override fun onTouchEvent(ev: MotionEvent): Boolean {
         if (isHeaderReady && isReady) {
             when (ev.action) {
-                MotionEvent.ACTION_MOVE -> if (mIsBeingDragged) {
+                MotionEvent.ACTION_MOVE -> {
                     val diffY = ev.y - mInitialY
                     changeHeader(diffY.toInt())
                 }
 
-                MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> if (mIsBeingDragged) {
+                MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
                     resetHeader()
                     return true
                 }

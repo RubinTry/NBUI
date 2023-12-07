@@ -13,7 +13,11 @@ NBUI，As the name suggests, This is a fantastic UI view library , it contains s
 ## View List（When you can click it , it's usable）
 * pull
   - [NBElasticView](./document/readme_nb_elastic.md)
+* drag
+  - [NBFloatView](./document/readme_nb_float.md)  
 * normalView
   - NBImageView
   - NBProgressBar
+* drag
+ - NBFloatView
 

@@ -15,4 +15,6 @@ interface INBUIInterface {
      * 初始化
      */
     fun init()
+
+
 }

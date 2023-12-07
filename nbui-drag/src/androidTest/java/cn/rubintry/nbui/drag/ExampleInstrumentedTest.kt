@@ -1,4 +1,4 @@
-package cn.rubintry.nbui
+package cn.rubintry.nbui.drag
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("cn.rubintry.nbui", appContext.packageName)
+        assertEquals("cn.rubintry.nbui.drag.test", appContext.packageName)
     }
 }
