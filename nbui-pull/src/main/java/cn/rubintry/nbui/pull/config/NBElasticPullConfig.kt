@@ -12,7 +12,7 @@ class NBElasticPullConfig : INBUIConfig {
 
     private var elasticCoefficient: Double = NBElasticView.DEFAULT_ELASTIC_COEFFCIENT
 
-    override fun init(): NBUI {
+    override fun endConfig(): NBUI {
         return NBUI.getInstance()
     }
 

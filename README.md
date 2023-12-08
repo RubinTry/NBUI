@@ -22,12 +22,12 @@ Application
             .setWidth(150)
             .setHeight(150)
             .setPosition(new Point(100 , 100))
-            .init()
+            .endConfig()
             //end setting
             //set the config of NBElasticView
             .config(NBElasticPullConfig.class)
             .setElasticCoefficient(0.9f)
-            .init();//end setting
+            .endConfig();//end setting
 
 ```
 

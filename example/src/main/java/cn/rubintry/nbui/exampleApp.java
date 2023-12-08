@@ -20,11 +20,11 @@ public class exampleApp extends Application {
                 .setWidth(150)
                 .setHeight(150)
                 .setPosition(new Point(100 , 100))
-                .init()
+                .endConfig()
                 //结束设置
                 //设置NBElasticView相关配置
                 .config(NBElasticPullConfig.class)
                 .setElasticCoefficient(0.9f)
-                .init();//结束设置
+                .endConfig();//结束设置
     }
 }

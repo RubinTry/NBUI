@@ -50,7 +50,7 @@ class NBFloatViewConfig : INBUIConfig {
         return enableSavePosition
     }
 
-    override fun init(): NBUI {
+    override fun endConfig(): NBUI {
         return NBUI.getInstance()
     }
 }
