@@ -11,6 +11,26 @@ NBUI，As the name suggests, This is a fantastic UI view library , it contains s
 * Support simulated Tiktok of chinese's "Mine" pull-down zoom effect and cross boundary rebound
 * Support floating ball drag effect(typical requirement: [Entrance suspension effect similar to Dokit toolkit](https://github.com/didi/DoKit))
 
+Global config<br>
+Application
+
+```java
+//UI global config ,priority is lower than directly setting view
+    NBUI.getInstance()
+            //set the config of NBFloatView
+            .config(NBFloatViewConfig.class)
+            .setWidth(150)
+            .setHeight(150)
+            .setPosition(new Point(100 , 100))
+            .init()
+            //end setting
+            //set the config of NBElasticView
+            .config(NBElasticPullConfig.class)
+            .setElasticCoefficient(0.9f)
+            .init();//end setting
+
+```
+
 ## View List（When you can click it , it's usable）
 * pull
   - [NBElasticView](./document/readme_nb_elastic.md)

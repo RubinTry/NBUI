@@ -14,6 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.graphics.toRect
 import cn.rubintry.nbui.core.INBUIInterface
+import cn.rubintry.nbui.core.NBUI
+import cn.rubintry.nbui.drag.config.NBFloatViewConfig
 import com.blankj.utilcode.util.BarUtils
 
 
@@ -29,17 +31,17 @@ class NBFloatView : View , INBUIInterface{
     /**
      * 宽度
      */
-    var mWidth = 150f
+    var mWidth = -1
 
     /**
      * 高度
      */
-    var mHeight = 150f
+    var mHeight = -1
 
     /**
      * 起始位置
      */
-    var point = Point(0 , 0)
+    var position : Point ?= null
 
     private val positionHandler = PositionHandler()
 
@@ -89,6 +91,15 @@ class NBFloatView : View , INBUIInterface{
         mPaint = Paint()
         mPaint?.isAntiAlias = true
         mPaint?.color = Color.parseColor("#000000")
+        if(mWidth == -1){
+            mWidth = NBUI.getInstance().config(NBFloatViewConfig::class.java).getWidth()
+        }
+        if(mHeight == -1){
+            mHeight = NBUI.getInstance().config(NBFloatViewConfig::class.java).getHeight()
+        }
+        if(position == null){
+            position = NBUI.getInstance().config(NBFloatViewConfig::class.java).getPosition()
+        }
     }
 
 
@@ -109,10 +120,10 @@ class NBFloatView : View , INBUIInterface{
             when(event.action){
                 MotionEvent.ACTION_DOWN -> {
                     downTime = System.currentTimeMillis()
-                    point.set((event.x - mWidth / 2).toInt(), (event.y - mHeight / 2).toInt())
+                    position?.set((event.x - mWidth / 2).toInt(), (event.y - mHeight / 2).toInt())
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    point.set((event.x - mWidth / 2).toInt(), (event.y - mHeight / 2).toInt())
+                    position?.set((event.x - mWidth / 2).toInt(), (event.y - mHeight / 2).toInt())
                 }
                 MotionEvent.ACTION_UP -> {
                     if(System.currentTimeMillis() - downTime < 100){
@@ -126,6 +137,10 @@ class NBFloatView : View , INBUIInterface{
         return false
     }
 
+
+    /**
+     * 将悬浮按钮添加至窗口
+     */
     fun addSelfToWindow() {
         val mDecorView = ((context as Activity).window.decorView as? ViewGroup)
         mDecorView?.removeView(this)

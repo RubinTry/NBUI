@@ -3,16 +3,15 @@ package cn.rubintry.nbui
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Point
 import android.graphics.RectF
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.core.graphics.toRect
 import cn.rubintry.nbui.drag.NBFloatView
 import cn.rubintry.nbui.drag.OnClickListener
 import cn.rubintry.nbui.drag.OnDrawListener
-import kotlin.math.min
 
 class FloatViewActivity : ComponentActivity() {
     private var nbFloatView : NBFloatView ?= null
@@ -23,6 +22,9 @@ class FloatViewActivity : ComponentActivity() {
         tvTest = findViewById(R.id.tvTest)
         nbFloatView = NBFloatView(this)
         nbFloatView?.addSelfToWindow()
+//        nbFloatView?.mWidth = 150
+//        nbFloatView?.mHeight = 150
+//        nbFloatView?.position = Point(0 , 0)
         nbFloatView?.setOnClickListener(object : OnClickListener{
             override fun click(view: NBFloatView) {
                 Toast.makeText(this@FloatViewActivity, "点击了悬浮按钮", Toast.LENGTH_SHORT).show()

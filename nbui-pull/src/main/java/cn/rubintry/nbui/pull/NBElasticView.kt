@@ -16,6 +16,8 @@ import androidx.core.view.NestedScrollingParent3
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewCompat.TYPE_NON_TOUCH
 import cn.rubintry.nbui.core.INBUIInterface
+import cn.rubintry.nbui.core.NBUI
+import cn.rubintry.nbui.pull.config.NBElasticPullConfig
 import kotlin.math.abs
 
 
@@ -46,12 +48,15 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3, Nes
      */
     var maxPullHeight: Int = DEFAULT_MAX_PULL_HEIGHT
 
-    private val DEFAULT_ELASTIC_COEFFCIENT : Double = 0.95
+    companion object{
+        @JvmField
+        val DEFAULT_ELASTIC_COEFFCIENT : Double = 0.95
+    }
 
     /**
      * 下拉放大阻力系数
      */
-    var elasticCoefficient: Double = DEFAULT_ELASTIC_COEFFCIENT
+    var elasticCoefficient: Double = (-1).toDouble()
 
     /**
      * 最后一次偏移时产生的偏移量
@@ -76,7 +81,7 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3, Nes
         val typedArray = context?.obtainStyledAttributes(attrs, R.styleable.NBElasticView)
         elasticCoefficient = typedArray?.getFloat(R.styleable.NBElasticView_elasticCoefficient , -1f)?.toDouble() ?: (-1).toDouble()
         if(elasticCoefficient == (-1).toDouble()){
-            elasticCoefficient = DEFAULT_ELASTIC_COEFFCIENT
+            elasticCoefficient = NBUI.getInstance().config(NBElasticPullConfig::class.java).getElasticCoefficient()
         }
         maxPullHeight = typedArray?.getDimensionPixelOffset(R.styleable.NBElasticView_maxPullHeight , 0) ?: 0
         if(maxPullHeight == 0){
@@ -94,6 +99,8 @@ class NBElasticView : FrameLayout , INBUIInterface , NestedScrollingParent3, Nes
         overScrollMode = OVER_SCROLL_NEVER
         elasticPull = ElasticPullFactory.create(elasticCoefficient)
         mNestedScrollingChildHelper = NestedScrollingChildHelper(this)
+
+
     }
     /**
      * @param onReadyPullListener 触发下拉放大的监听器

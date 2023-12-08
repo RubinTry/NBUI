@@ -6,6 +6,7 @@ import android.graphics.RectF
 internal class PositionHandler {
 
     fun getRectF(view: NBFloatView): RectF {
-        return RectF(view.point.x.toFloat() , view.point.y.toFloat() , view.point.x.toFloat() + view.mWidth , view.point.y.toFloat() + view.mHeight)
+        val position = view.position ?: return RectF()
+        return RectF(position.x.toFloat() , position.y.toFloat() , position.x.toFloat() + view.mWidth , position.y.toFloat() + view.mHeight)
     }
 }
