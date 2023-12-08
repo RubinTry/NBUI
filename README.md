@@ -19,6 +19,4 @@ NBUI，As the name suggests, This is a fantastic UI view library , it contains s
 * normalView
   - NBImageView
   - NBProgressBar
-* drag
- - NBFloatView
 
