@@ -3,6 +3,8 @@
 
 NBUI，As the name suggests, This is a fantastic UI view library , it contains some UI components that are not easily found in other UI libraries
 
+# EFFECT
+![Alt text](./document/xg.gif)
 
 ## Introduction
 * Support Androidx
