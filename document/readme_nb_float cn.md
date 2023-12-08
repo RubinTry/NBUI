@@ -31,7 +31,8 @@ kt
     })
 ```
 java
-```kotlin
+```java
+    NBFloatView nbFloatView = new NBFloatView(this);
     nbFloatView.setOnClickListener(new OnClickListener() {
             @Override
             public void click(@NonNull NBFloatView view) {
