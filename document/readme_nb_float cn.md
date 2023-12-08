@@ -1,5 +1,5 @@
 
-## Example code
+## 代码样例
 in you activity
 <br>
 kt
@@ -7,13 +7,13 @@ kt
     nbFloatView = NBFloatView(this)
     //add to window
     nbFloatView?.addSelfToWindow()
-    //Click event.
+    //点击事件
     nbFloatView?.setOnClickListener(object : OnClickListener{
         override fun click(view: NBFloatView) {
             Toast.makeText(this@FloatViewActivity, "点击了悬浮按钮", Toast.LENGTH_SHORT).show()
         }
     })
-    //draw a circle to FloatView
+    //在NBFloatView上绘制一个圆
     nbFloatView?.setMode(object : OnDrawListener{
         override fun onDraw(rectF: RectF, canvas: Canvas? , view: NBFloatView , paint: Paint?) {
             val cx = rectF.left + rectF.width() / 2
@@ -22,7 +22,7 @@ kt
             canvas?.drawCircle(cx , cy , radius , paint!!)
         }
     })
-    //draw a image to FloatView
+    //在NBFloatView上绘制一张图
     nbFloatView?.setMode(object : OnDrawListener{
         override fun onDraw(rectF: RectF, canvas: Canvas?, view: NBFloatView, paint: Paint?) {
             val bitmap = BitmapFactory.decodeResource(resources , R.mipmap.favicon)
@@ -38,7 +38,7 @@ java
                 Toast.makeText(this@FloatViewActivity, "点击了悬浮按钮", Toast.LENGTH_SHORT).show()
             }
         });
-    //draw a circle to FloatView
+    //绘制一个圆
    nbFloatView.setMode(new OnDrawListener() {
             @Override
             public void onDraw(@NonNull RectF rectF, @Nullable Canvas canvas, @NonNull NBFloatView view, @Nullable Paint paint) {
@@ -48,7 +48,7 @@ java
                 canvas.drawCircle(cx , cy , radius , paint);
             }
         });
-   //draw a image to FloatView
+   //绘制一张图
      nbFloatView.setMode(new OnDrawListener() {
             @Override
             public void onDraw(@NonNull RectF rectF, @Nullable Canvas canvas, @NonNull NBFloatView view, @Nullable Paint paint) {

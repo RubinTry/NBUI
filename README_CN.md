@@ -10,6 +10,8 @@ NBUI，顾名思义，牛bi的UI，这里面包含一些不那么容易在其他
 ## 控件列表（能点进文档的都是开发完成的）
 * pull
   - [NBElasticView](./document/readme_nb_elastic_cn.md)
+* drag
+  - [NBFloatView](./document/readme_nb_float_cn.md)  
 * normalView
   - NBImageView
   - NBProgressBar
