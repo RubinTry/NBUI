@@ -1,4 +1,4 @@
-# It's the rendering
+# It's the effect
 ![Alt text](./document/../floatview_example.gif)
 ## Example code
 in you activity
