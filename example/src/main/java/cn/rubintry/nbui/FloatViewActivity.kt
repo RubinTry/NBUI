@@ -34,7 +34,7 @@ class FloatViewActivity : ComponentActivity() {
         })
 
         //用canvas绘制一个圆
-//        nbFloatView?.setMode(object : OnDrawListener{
+//        nbFloatView?.setOnDrawListener(object : OnDrawListener{
 //            override fun onDraw(rectF: RectF, canvas: Canvas? , view: NBFloatView , paint: Paint?) {
 //                val cx = rectF.left + rectF.width() / 2
 //                val cy = rectF.top + rectF.height() / 2

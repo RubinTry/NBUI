@@ -23,10 +23,17 @@ kt
         }
     })
     //在NBFloatView上绘制一张图
-    nbFloatView?.setMode(object : OnDrawListener{
+    nbFloatView?.setOnDrawListener(object : OnDrawListener{
         override fun onDraw(rectF: RectF, canvas: Canvas?, view: NBFloatView, paint: Paint?) {
+            val saveCount = canvas?.saveCount ?: 0
+            val shadowRadius = 40f // 阴影半径
+            // 设置阴影效果
+            paint?.setShadowLayer(shadowRadius, 0f, 0f, Color.parseColor("#99000000"))
+            paint?.color = 0xFFFFFFFF.toInt()
+            canvas?.drawRoundRect( RectF(rectF.left + shadowRadius / 2 , rectF.top + shadowRadius / 2 , rectF.right - shadowRadius / 2 , rectF.bottom - shadowRadius / 2)  , rectF.width() / 2f , rectF.height() / 2f , paint!!)
             val bitmap = BitmapFactory.decodeResource(resources , R.mipmap.favicon)
-            canvas?.drawBitmap(bitmap , null , rectF , paint)
+            canvas?.drawBitmap(bitmap , null , RectF(rectF.left + shadowRadius / 2 , rectF.top + shadowRadius / 2 , rectF.right - shadowRadius / 2 , rectF.bottom - shadowRadius / 2) , paint)
+            canvas?.restoreToCount(saveCount)
         }
     })
 ```
