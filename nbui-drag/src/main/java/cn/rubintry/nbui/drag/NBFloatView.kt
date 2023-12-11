@@ -9,10 +9,12 @@ import android.graphics.Paint
 import android.graphics.Point
 import android.graphics.Region
 import android.util.AttributeSet
+import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.graphics.toRect
+import androidx.core.view.DragStartHelper
 import cn.rubintry.nbui.core.INBUIInterface
 import cn.rubintry.nbui.core.NBUI
 import cn.rubintry.nbui.drag.config.NBFloatViewConfig
@@ -102,6 +104,14 @@ class NBFloatView : View , INBUIInterface{
         }
     }
 
+    override fun onDragEvent(event: DragEvent?): Boolean {
+        return super.onDragEvent(event)
+    }
+
+    override fun setOnDragListener(l: OnDragListener?) {
+        super.setOnDragListener(l)
+    }
+
 
     fun setOnDrawListener(onDrawListener: OnDrawListener){
         this.onDrawListener = onDrawListener
@@ -148,6 +158,9 @@ class NBFloatView : View , INBUIInterface{
     }
 
 
+    /**
+     * 确保能够不侵入状态栏
+     */
     override fun layout(l: Int, t: Int, r: Int, b: Int) {
         super.layout(l, t + BarUtils.getStatusBarHeight(), r,b)
     }
