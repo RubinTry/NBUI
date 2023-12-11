@@ -11,7 +11,7 @@ import kotlin.math.pow
  * @author rubintry
  * @param elasticCoefficient 弹性阻力系数
  */
-class ElasticPull(private val elasticCoefficient: Double) {
+internal class ElasticPull(private val elasticCoefficient: Double) {
 
     /**
      * @param headerView

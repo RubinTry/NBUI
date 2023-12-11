@@ -21,8 +21,9 @@ import cn.rubintry.nbui.pull.config.NBElasticPullConfig
 import kotlin.math.abs
 
 
+
 /**
- * @author rubintry
+ * Created by RubinTry on 2023/12/08.
  * NB的仿抖音“我的”页面的下拉放大效果，特别NB，自带惯性越界回弹
  * 回弹时，速度越快，回弹越猛
  */

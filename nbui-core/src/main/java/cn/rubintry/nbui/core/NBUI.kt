@@ -8,8 +8,6 @@ import java.util.concurrent.ConcurrentHashMap
  */
 class NBUI private constructor(){
 
-//    private val uiConfigList = mutableListOf<INBUIConfig>()
-
     private val uiGlobalConfigMap = ConcurrentHashMap<Class<out INBUIConfig> , INBUIConfig>()
 
     companion object{

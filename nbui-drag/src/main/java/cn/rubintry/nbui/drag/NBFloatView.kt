@@ -103,7 +103,7 @@ class NBFloatView : View , INBUIInterface{
     }
 
 
-    fun setMode(onDrawListener: OnDrawListener){
+    fun setOnDrawListener(onDrawListener: OnDrawListener){
         this.onDrawListener = onDrawListener
     }
 

@@ -3,6 +3,11 @@ package cn.rubintry.nbui.core
 import android.content.Context
 import android.util.AttributeSet
 
+
+/**
+ * Created by RubinTry on 2023/12/07.
+ * UI库标准接口
+ */
 interface INBUIInterface {
 
     /**

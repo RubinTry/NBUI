@@ -17,8 +17,8 @@ public class exampleApp extends Application {
         NBUI.getInstance()
                 //设置NBFloatView相关配置
                 .config(NBFloatViewConfig.class)
-                .setWidth(150)
-                .setHeight(150)
+                .setWidth(200)
+                .setHeight(200)
                 .setPosition(new Point(100 , 100))
                 .endConfig()
                 //结束设置

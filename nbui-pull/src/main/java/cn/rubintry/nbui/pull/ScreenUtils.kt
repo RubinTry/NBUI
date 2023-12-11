@@ -8,7 +8,7 @@ import android.view.WindowManager
 /**
  * @author rubintry
  */
-object ScreenUtils {
+internal object ScreenUtils {
     fun getScreenHeight(context: Context): Int {
         val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             ?: return -1

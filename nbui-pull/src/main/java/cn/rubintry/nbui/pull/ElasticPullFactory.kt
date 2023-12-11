@@ -1,6 +1,6 @@
 package cn.rubintry.nbui.pull
 
-object ElasticPullFactory {
+internal object ElasticPullFactory {
 
     /**
      * 弹性阻力系数
