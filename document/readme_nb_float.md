@@ -1,4 +1,5 @@
-
+# It's the rendering
+![Alt text](./document/../floatview_example.gif)
 ## Example code
 in you activity
 <br>

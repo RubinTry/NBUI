@@ -1,4 +1,5 @@
-
+# 先上效果图
+![Alt text](./document/../floatview_example.gif)
 ## 代码样例
 in you activity
 <br>
