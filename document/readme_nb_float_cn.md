@@ -48,7 +48,7 @@ java
             }
         });
     //绘制一个圆
-   nbFloatView.setMode(new OnDrawListener() {
+   nbFloatView.setOnDrawListener(new OnDrawListener() {
             @Override
             public void onDraw(@NonNull RectF rectF, @Nullable Canvas canvas, @NonNull NBFloatView view, @Nullable Paint paint) {
                 float cx = rectF.left + rectF.width() / 2;
@@ -58,11 +58,17 @@ java
             }
         });
    //绘制一张图
-     nbFloatView.setMode(new OnDrawListener() {
+    nbFloatView.setOnDrawListener(new OnDrawListener() {
             @Override
             public void onDraw(@NonNull RectF rectF, @Nullable Canvas canvas, @NonNull NBFloatView view, @Nullable Paint paint) {
+                int saveCount = canvas.getSaveCount();
+                float shadowRadius = 40f;
+                // 设置阴影效果
+                paint.setShadowLayer(shadowRadius, 0f, 0f, Color.parseColor("#99000000"))
+                 paint.color = 0xFFFFFFFF
+                canvas.drawRoundRect(new RectF(rectF.left + shadowRadius / 2 , rectF.top + shadowRadius / 2 , rectF.right - shadowRadius / 2 , rectF.bottom - shadowRadius / 2)  , rectF.width() / 2f , rectF.height() / 2f , paint)
                 Bitmap bitmap = BitmapFactory.decodeResource(getResource() , R.mipmap.favicon);
                 canvas.drawBitmap(bitmap , null , rectF , paint);
             }
-        });        
+        });     
 ```
