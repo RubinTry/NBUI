@@ -1,0 +1,13 @@
+{
+  "nativePlugins": [
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "TestModule",
+          "class": "cn.rubintry.nbui.core.NbuiUniBridge"
+        }
+      ]
+    }
+  ]
+}

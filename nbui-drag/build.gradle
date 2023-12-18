@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdk 24
+        minSdk 21
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-
+    compileOnly fileTree(dir: '../example/libs', include: ['uniapp-v8-release.aar'])
     api project(path: ':nbui-core')
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -39,6 +39,4 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // if u use AndroidX, use the following
-    implementation 'com.blankj:utilcodex:1.31.1'
 }

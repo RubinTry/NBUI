@@ -1,0 +1,28 @@
+{
+	"name": "NBUI",
+	"id": "NBUI-Uni",
+	"version": "1.0.0",
+	"description": "NBUI，顾名思义，牛bi的UI，这里面包含一些不那么容易在其他UI库中找到的UI组件，主打一个稀有",
+	"_dp_type":"nativeplugin",
+	"_dp_nativeplugin":{
+		"android": {
+			"plugins": [
+				{
+					"type": "module",
+					"name": "NBUI-Uni-core",
+					"class": "cn.rubintry.nbui.core.NbuiUniBridge"
+				}
+			],
+			"integrateType": "aar",
+			"compileOptions": {
+				"sourceCompatibility": "1.8",
+				"targetCompatibility": "1.8"
+			},
+			"abis": [
+				"armeabi-v7a|arm64-v8a|x86"
+			],
+			"minSdkVersion": "可选，支持的Android最低版本，如21",
+			"useAndroidX": true
+		}
+	}
+}

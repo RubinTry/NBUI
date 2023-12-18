@@ -1,5 +1,6 @@
 package cn.rubintry.nbui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.ComponentActivity
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.rubintry.nbui.pull.NBElasticView
 import cn.rubintry.nbui.pull.OnReadyPullListener
+
+
 
 class ElasticViewActivity : ComponentActivity() {
     private val adapter = RvTestAdapter(mutableListOf())
@@ -23,7 +26,7 @@ class ElasticViewActivity : ComponentActivity() {
         imgHeader = findViewById(R.id.imgHeader)
         rvTest = findViewById(R.id.rvTest)
 
-
+//        elasticView?.setBackgroundColor(Color.parseColor("#000000"))
         elasticView?.setHeader(imgHeader)
         elasticView?.setOnReadyPullListener(object : OnReadyPullListener {
             override fun isReady(): Boolean {

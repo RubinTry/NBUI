@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
+
+
 class RvTestAdapter(private var list: MutableList<String>) : Adapter<RvTestAdapter.RvVH>() {
 
 

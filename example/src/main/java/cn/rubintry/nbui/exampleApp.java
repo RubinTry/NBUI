@@ -3,9 +3,9 @@ package cn.rubintry.nbui;
 import android.app.Application;
 import android.graphics.Point;
 
-import cn.rubintry.nbui.drag.config.NBFloatViewConfig;
+import cn.rubintry.nbui.core.config.NBFloatViewConfig;
 import cn.rubintry.nbui.core.NBUI;
-import cn.rubintry.nbui.pull.config.NBElasticPullConfig;
+import cn.rubintry.nbui.core.config.NBElasticPullConfig;
 
 public class exampleApp extends Application {
 

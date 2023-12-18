@@ -12,6 +12,8 @@ import androidx.activity.ComponentActivity
 import cn.rubintry.nbui.drag.NBFloatView
 import cn.rubintry.nbui.drag.OnClickListener
 import cn.rubintry.nbui.drag.OnDrawListener
+
+
 import kotlin.math.max
 
 class FloatViewActivity : ComponentActivity() {

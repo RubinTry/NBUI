@@ -23,4 +23,11 @@
         android:layout_height="50dp"
         android:text="NBFloatView"
         style="@style/MainTextView"/>
+
+    <TextView
+        android:id="@+id/tvImageView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="NBImageView"
+        style="@style/MainTextView"/>
 </LinearLayout>
