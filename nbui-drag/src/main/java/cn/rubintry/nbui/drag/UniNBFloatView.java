@@ -19,7 +19,7 @@ public class UniNBFloatView extends UniModule {
 
     @UniJSMethod
     public void attach(){
-        nbFloatView = new NBFloatView(mWXSDKInstance.getUIContext());
+        nbFloatView = new NBFloatView(mUniSDKInstance.getContext());
         nbFloatView.addSelfToWindow();
         //canvas绘制图片
         nbFloatView.setOnDrawListener(new OnDrawListener() {
@@ -34,7 +34,7 @@ public class UniNBFloatView extends UniModule {
                 paint.setShadowLayer(shadowRadius, 0f, 0f, Color.parseColor("#99000000"));
                 paint.setColor(0xFFFFFFFF);
                 canvas.drawRoundRect(new RectF(rectF.left + shadowRadius / 2 , rectF.top + shadowRadius / 2 , rectF.right - shadowRadius / 2 , rectF.bottom - shadowRadius / 2)  , rectF.width() / 2f , rectF.height() / 2f , paint);
-                Bitmap bitmap = BitmapFactory.decodeResource(mWXSDKInstance.getUIContext().getResources(), cn.rubintry.nbui.drag.R.mipmap.favicon);
+                Bitmap bitmap = BitmapFactory.decodeResource(mUniSDKInstance.getContext().getResources(), cn.rubintry.nbui.drag.R.mipmap.favicon);
                 canvas.drawBitmap(bitmap , null , new RectF(rectF.left + shadowRadius / 2 , rectF.top + shadowRadius / 2 , rectF.right - shadowRadius / 2 , rectF.bottom - shadowRadius / 2) , paint);
                 canvas.restoreToCount(saveCount);
             }
