@@ -1,5 +1,5 @@
 # NBUI
-[中文文档](./README_CN.md)[UniApp版](./document/uniapp/uniapp_cn.md)
+[中文文档](./README_CN.md)  [UniApp版](./document/uniapp/uniapp_cn.md)
 
 NBUI，As the name suggests, This is a fantastic UI view library , it contains some UI components that are not easily found in other UI libraries
 
