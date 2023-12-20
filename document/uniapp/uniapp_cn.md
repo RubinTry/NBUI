@@ -52,6 +52,11 @@
         }
     }
     ```
+    - 按照图中顺序勾选插件
+
+    ![Alt text](./step.png)
+    - 利用HBuilderX制作自定义基座并打包运行即可
+    
   
 * 离线打包基座（IDE使用[AndroidStudio](https://developer.android.google.cn/)）
    - 下载最新版[离线打包SDK](https://nativesupport.dcloud.net.cn/NativePlugin/offline_package/android.html)
