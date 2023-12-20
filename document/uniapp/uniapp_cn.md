@@ -70,6 +70,7 @@
             try {
                //解决Failed to resolve component报错  https://ask.dcloud.net.cn/question/160807
                 UniSDKEngine.registerComponent("UniNBElasticView", UniNBElasticView.class);
+                 UniSDKEngine.registerModule("UniNBFloatView" , UniNBFloatView.class);
             } catch (UniException e) {
                 e.printStackTrace();
             }
