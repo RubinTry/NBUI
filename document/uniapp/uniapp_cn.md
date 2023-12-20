@@ -19,14 +19,23 @@
         "id": "NBUI-Uni",
         "version": "1.0.0",
         "description": "NBUI，顾名思义，牛bi的UI，这里面包含一些不那么容易在其他UI库中找到的UI组件，主打一个稀有",
-        "_dp_type":"nativeplugin",
-        "_dp_nativeplugin":{
+        "_dp_type": "nativeplugin",
+        "_dp_nativeplugin": {
             "android": {
-                "plugins": [
-                    {
+                "plugins": [{
                         "type": "module",
                         "name": "NBUI-Uni-core",
                         "class": "cn.rubintry.nbui.core.NbuiUniBridge"
+                    },
+                    {
+                        "type": "module",
+                        "name": "UniNBFloatView",
+                        "class": "cn.rubintry.nbui.drag.UniNBFloatView"
+                    },
+                    {
+                        "type": "component",
+                        "name": "UniNBElasticView",
+                        "class": "cn.rubintry.nbui.pull.UniNBElasticView"
                     }
                 ],
                 "integrateType": "aar",

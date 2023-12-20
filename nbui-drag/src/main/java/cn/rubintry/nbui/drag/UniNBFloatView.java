@@ -18,6 +18,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.taobao.weex.bridge.SimpleJSCallback;
 
 import cn.rubintry.nbui.core.Error;
+import io.dcloud.feature.uniapp.UniSDKEngine;
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import io.dcloud.feature.uniapp.common.UniModule;
