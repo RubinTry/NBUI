@@ -1,0 +1,41 @@
+<template>
+	<view>
+		
+	</view>
+</template>
+
+<script>
+	var floatView = uni.requireNativePlugin("UniNBFloatView")
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		mounted() {
+			floatView.attach();
+			floatView.setOnClickListener((msg) => {
+				console.log(msg);
+				uni.showToast({
+					icon:"none",
+					title: msg
+				})
+			});
+		},
+		onBackPress() {
+			floatView.detach();
+		},
+		methods: {
+			getRealUrl(url){
+				if(url.startsWith("/")){
+					return plus.io.convertLocalFileSystemURL(url)
+				}
+				return url;
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>

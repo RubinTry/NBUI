@@ -1,0 +1,44 @@
+<template>
+	<div :style="{width: screenWidth , height: screenHeight , backgroundColor: '#ffffff'}">
+		<!-- :bgc 组件透明度，支持使用八位数十六进制颜色码，前两位表示不透明度，取值范围00~FF -->
+		<UniNBElasticView :bgc="'#88aaaaaa'" :NBWidth=getScreenWidth() :NBHeight=getScreenHeight() headerImagePath="https://rubintry.com.cn:8888/a_logo.png" :dataArray="mListData">
+		</UniNBElasticView>
+	</div>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				screenWidth : 0,
+				screenHeight: 0,
+				mListData: [
+					"1"
+				]
+			}
+		},
+		components: {
+			
+		},
+		methods: {
+			getScreenWidth(){
+				return this.screenWidth;
+			},
+			getScreenHeight(){
+				return this.screenHeight;
+			}
+		},
+		created(){
+			const windowInfo = uni.getWindowInfo();
+			this.screenWidth = windowInfo.screenWidth * windowInfo.pixelRatio;
+			this.screenHeight = windowInfo.windowHeight * windowInfo.pixelRatio;
+			for (var i = 0; i < 100; i++) {
+				this.mListData[i] = i + "";
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>
