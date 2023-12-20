@@ -3,9 +3,14 @@ package cn.rubintry.nbui.core;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NBUI {
-    private ConcurrentHashMap<Class<? extends INBUIConfig> , INBUIConfig> uiGlobalConfigMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Class<? extends INBUIConfig> , INBUIConfig> uiGlobalConfigMap = new ConcurrentHashMap<>();
 
     private static volatile NBUI instance;
+
+
+    private NBUI(){
+
+    }
 
     public static NBUI getInstance(){
         if(instance == null){
@@ -18,9 +23,6 @@ public class NBUI {
         return instance;
     }
 
-    private NBUI(){
-
-    }
 
 
     /**
@@ -35,7 +37,6 @@ public class NBUI {
             uiGlobalConfigMap.put(clazz , obj);
             return (T) obj;
         }catch (Exception e){
-
         }
         return null;
     }

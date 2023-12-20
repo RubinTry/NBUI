@@ -41,13 +41,13 @@ public class NBFloatView extends View implements INBUIInterface {
      */
     Point position = null;
 
-    private PositionHandler positionHandler = new PositionHandler();
+    private final PositionHandler positionHandler = new PositionHandler();
 
 
     /**
      * 视图区域，用于判断是否在视图区域内
      */
-    private Region viewRegion = new Region();
+    private final Region viewRegion = new Region();
 
 
     /**
@@ -117,6 +117,7 @@ public class NBFloatView extends View implements INBUIInterface {
     /**
      * 处理拖拽
      */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(viewRegion.contains((int)event.getX(), (int)event.getY())){
@@ -149,6 +150,17 @@ public class NBFloatView extends View implements INBUIInterface {
         ViewGroup mDecorView = (ViewGroup) ((Activity)getContext()).getWindow().getDecorView();
         mDecorView.removeView(this);
         mDecorView.addView(this);
+    }
+
+
+    /**
+     * 移除当前view
+     */
+    public void detachSelf(){
+        mOnClickListener = null;
+        onDrawListener = null;
+        ViewGroup mDecorView = (ViewGroup) ((Activity)getContext()).getWindow().getDecorView();
+        mDecorView.removeView(this);
     }
 
     /**

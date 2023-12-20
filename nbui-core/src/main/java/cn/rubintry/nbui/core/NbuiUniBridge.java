@@ -15,9 +15,8 @@ import io.dcloud.feature.uniapp.common.UniModule;
 
 public class NbuiUniBridge extends UniModule {
 
-    private static final String TAG= "NbuiUniBridge";
 
-    private NBUI mNBUI;
+    private final NBUI mNBUI;
 
     public NbuiUniBridge() {
         mNBUI = NBUI.getInstance();
