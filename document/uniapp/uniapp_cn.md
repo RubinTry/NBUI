@@ -10,9 +10,9 @@
   - 在nativeplugins下创建一个目录，取名为你的插件名称，如NBUI-Uni
   - 在插件目录下创建名为android的文件夹，须一字不差
   - 从[release页](https://github.com/RubinTry/NBUI/releases)下载插件压缩包并解压
-  - 将下载的aar包挨个放进android目录，如下图所示![Alt text](./plugin.png)
+  - 将下载的aar包挨个放进android目录，如下图所示![Alt text](./plugins.png)
   - 继续根据官网教程制作自定义基座，在HBuilderX中，点击运行->运行到手机或模拟器->制作自定义调试基座，基座制作完成后，选择制作好的基座运行即可
-  - 编写package.json，代码如下
+  - 编写package.json(与android文件夹同级)，代码如下
     ```json
     {
         "name": "NBUI",
