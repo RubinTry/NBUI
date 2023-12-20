@@ -5,6 +5,7 @@
 3. 使用UniNBElasticView时，列表部分仅支持原生封装，如需自定义item，请自行封装实现
 
 ## 插件接入（Android）
+  [Demo](https://github.com/RubinTry/NBUI/tree/master/NBUI-Uni-demo)
 * 在线自定义基座
   - 在uniapp项目根目录下创建名为nativeplugins的文件夹（一个字也不能错）
   - 在nativeplugins下创建一个目录，取名为你的插件名称，如NBUI-Uni
